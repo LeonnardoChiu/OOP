@@ -10,15 +10,35 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    
+    var learnerInstance: LearnerModel?
+    var facilitatorInstance: FacilitatorModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("this is my first update")
+        learnerInstance = LearnerModel(learnerName: "Leonnardo", learnerAge: 20, learnerHeight: 173.5, learnerImageProfile: "this is image")
+        facilitatorInstance = FacilitatorModel(facilName: "Otong", facilAge: 21, facilHeight: 160.0, facilImageProfile: "asd", facilPerk: "Free Flow KOI")
+        updateUI()
+    }
+    
+    func updateUI(){
+        if let instance = learnerInstance{
+            nameLabel.text = instance.name
+            ageLabel.text = "\(instance.age) years old"
+            heightLabel.text = "\(instance.height) cm"
+        }
     }
 
-    func sum(){
-        
+    @IBAction func increaseAgeButton(_ sender: UIButton) {
+        if let instance = learnerInstance{
+            instance.increaseAge()
+            updateUI()
+        }
     }
-
 }
 
